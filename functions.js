@@ -23,40 +23,32 @@ const readDirectory = (route) => fs.readdirSync(route, "utf-8");
 //Valida si hay archivos con extensión .md
 const extMdFile = (route) => path.extname(route) === ".md";
 
-// //Lectura de archivo .md
-// const readMdFile = (route) => fs.readFileSync(route, "utf-8");
-
 let arrayMdFiles = [];
 
 //Lectura de ruta
 const getMdFiles = (currentRoute) => new Promise((resolve, reject) => {
 
-        if (folderPath(currentRoute)) { //Si es directorio entra aquí
+    if (folderPath(currentRoute)) { //Si es directorio entra aquí
 
-            Promise.all(readDirectory(currentRoute).map(elem => new Promise((resolve, reject) => {
-                let joinRoute = path.join(currentRoute, elem);
-                getMdFiles(joinRoute); // Aplica recursividad
-            })));
-        } else { //Si no es directorio, es archivo y entra acá
-            if (extMdFile(currentRoute)) {
-                arrayMdFiles.push(currentRoute);
-            }
+        Promise.all(readDirectory(currentRoute).map(elem => new Promise((resolve, reject) => {
+            let joinRoute = path.join(currentRoute, elem);
+            getMdFiles(joinRoute); // Aplica recursividad
+        })));
+    } else { //Si no es directorio, es archivo y entra acá
+        if (extMdFile(currentRoute)) {
+            arrayMdFiles.push(currentRoute);
         }
-        resolve(arrayMdFiles);
-    })
-    // .then(() => {
-    //     console.log('ARRAYMDFILES', arrayMdFiles);
-    // })
+    }
+    resolve(arrayMdFiles);
+})
 
-// console.log(getMdFiles(route));
 
-//Lee archivos .md
+//Lectura de archivo .md
 const readMdFiles = (MDfile) => {
     return new Promise((resolve, reject) => {
         fs.readFile(MDfile, "utf-8", (err, data) => {
             if (err) {
                 reject(err);
-                // console.log(clc.red('Could not read the file'));
             } else {
                 resolve({
                     route: MDfile,
@@ -66,8 +58,6 @@ const readMdFiles = (MDfile) => {
         });
     });
 };
-
-// readMdFiles(route).then(response => console.log('SE LEYÓ', response)).catch(err => console.error('NO SE LEYÓ')); //Lo que debe hacer cuando la promesa se cumpla o falle
 
 //Extrayendo URL´s del archivo .md
 const getLinksMdFiles = (routeMDfile) =>
@@ -102,8 +92,7 @@ const getLinksMdFiles = (routeMDfile) =>
             });
     });
 
-// getLinksMdFiles(route).then(response => console.log('SE LEYÓ', response)).catch(err => console.error('NO SE LEYÓ'));
-
+//Extrayendo información de cada link encontrado en archivo .md
 const getObjetsLinks = (route) =>
     getLinksMdFiles(route).then((arrayLinksConvert) => {
         // console.log('arrayLinksConvert', arrayLinksConvert);
@@ -134,7 +123,7 @@ const getObjetsLinks = (route) =>
         );
     });
 
-//Función que retorna el total de links y de links único
+//Función que retorna el total de links y links únicos
 const totalAndUnique = (arraylinks) => {
     const totalLinks = arraylinks.length;
     const uniqueLinks = new Set(arraylinks.map((element) => element.href)); // crear una colección de links únicos(no se repiten);
@@ -152,7 +141,6 @@ const broken = (arraylinks) => {
 // getObjetsLinks(route)
 //     .then((response) => console.log("RESPONDE", response))
 //     .catch((error) => console.log("NO RESPONDE", error));
-
 
 module.exports = {
     getMdFiles,

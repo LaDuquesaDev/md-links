@@ -8,6 +8,7 @@ const {
     broken,
 } = require("./functions.js");
 
+//Opciones API
 const readOptions = () => {
     let options = { validate: false };
     if (argv.length > 3) {
@@ -20,7 +21,7 @@ const readOptions = () => {
     return options
 }
 
-
+//Opciones CLI
 mdLinks.mdLinks(argv[2], readOptions())
     .then((res) => {
         if (argv.includes('--stats') || argv.includes('--s')) {
