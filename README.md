@@ -28,17 +28,21 @@ With MD-LINKS you will be able to read files that contain _links_ (links/links),
 
 `const { mdLinks } = require('md-links');`
 
-***Si deseas validar los links encontrados en tus archivos `.md` puedes usar la propiedad { validate:true } de la siguiente manera:***
+*Si deseas validar los links encontrados en tus archivos `.md` puedes usar la propiedad { validate:true } de la siguiente manera:*
+
 ![api](./img/api-v-true.png)
 
-***Valor de retorno:***
+*Valor de retorno:*
+
 ![validate true cli](./img/api-v-true-cli.png)
 
 
-***Si sólo deseas ver los links encontrados en tus archivos `.md` puedes usar la propiedad { validate:false } de la siguiente manera:***
+*Si sólo deseas ver los links encontrados en tus archivos `.md` puedes usar la propiedad { validate:false } de la siguiente manera:*
+
 ![api](./img/api-v-false.png)
 
-***Valor de retorno:***
+*Valor de retorno:*
+
 ![validate false cli](./img/api-v-false-cli.png)
 
 
