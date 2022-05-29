@@ -24,9 +24,9 @@ const readOptions = () => {
 mdLinks.mdLinks(argv[2], readOptions())
     .then((res) => {
         if (argv.includes('--stats') || argv.includes('--s')) {
-            console.table(totalAndUnique(res));
+            console.log(totalAndUnique(res));
             if ((argv.includes('--validate') || argv.includes('--v'))) {
-                console.table(broken(res));
+                console.log(broken(res));
             }
         } else if (argv.includes('--validate') || argv.includes('--v')) {
             res.forEach(e => {
