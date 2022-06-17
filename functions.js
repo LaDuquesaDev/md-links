@@ -23,31 +23,31 @@ const readDirectory = (route) => fs.readdirSync(route, "utf-8");
 //Valida si hay archivos con extensión .md
 const extMdFile = (route) => path.extname(route) === ".md";
 
-let arrayMdFiles = [];
 
 //Lectura de ruta
-const getMdFiles = (currentRoute) => new Promise((resolve, reject) => {
-
+const getMdFiles = (currentRoute) => {
+    let arrayMdFiles = [];
     if (folderPath(currentRoute)) { //Si es directorio entra aquí
 
-        Promise.all(readDirectory(currentRoute).map(elem => new Promise((resolve, reject) => {
+        readDirectory(currentRoute).forEach(elem => {
             let joinRoute = path.join(currentRoute, elem);
-            getMdFiles(joinRoute); // Aplica recursividad
-        })));
+            arrayMdFiles = arrayMdFiles.concat(getMdFiles(joinRoute)); // Aplica recursividad
+        });
     } else { //Si no es directorio, es archivo y entra acá
         if (extMdFile(currentRoute)) {
             arrayMdFiles.push(currentRoute);
         }
     }
-    resolve(arrayMdFiles);
-})
-
+    return arrayMdFiles;
+}
 
 //Lectura de archivo .md
 const readMdFiles = (MDfile) => {
+    // console.log('MDFILE', MDfile);
     return new Promise((resolve, reject) => {
         fs.readFile(MDfile, "utf-8", (err, data) => {
             if (err) {
+                // console.log('EEEERR', err);
                 reject(err);
             } else {
                 resolve({
@@ -93,49 +93,62 @@ const getLinksMdFiles = (routeMDfile) =>
     });
 
 //Extrayendo información de cada link encontrado en archivo .md
-const getObjetsLinks = (route) =>
-    getLinksMdFiles(route).then((arrayLinksConvert) => {
-        // console.log('arrayLinksConvert', arrayLinksConvert);
-        return Promise.all(
-            arrayLinksConvert.map((object) => {
-                return axios
-                    .get(object.href)
-                    .then((result) => {
-                        // result.status >= 200 && result.status <= 399 ? "Ok" : "Fail";
-                        return {
-                            href: object.href,
-                            text: object.text,
-                            file: object.file,
-                            status: result.status,
-                            message: "Ok",
-                        };
-                    })
-                    .catch((error) => {
-                        return {
-                            href: object.href,
-                            text: object.text,
-                            file: object.file,
-                            status: 404,
-                            message: "Fail",
-                        };
-                    });
-            })
-        );
-    });
+const getObjetsLinks = (routes) => {
+    const promises = routes.map(elem => {
+        return getLinksMdFiles(elem).then((arrayLinksConvert) => {
+            // console.log('arrayLinksConvert', arrayLinksConvert);
+            return Promise.all(
+                arrayLinksConvert.map((object) => {
+                    // console.log('OBJECT.HREF', object.href);
+                    return axios
+                        .get(object.href)
+                        .then((result) => {
+                            // result.status >= 200 && result.status <= 399 ? "Ok" : "Fail";
+                            return {
+                                href: object.href,
+                                text: object.text,
+                                file: object.file,
+                                status: result.status,
+                                message: "Ok",
+                            };
+                        })
+                        .catch((error) => {
+                            return {
+                                href: object.href,
+                                text: object.text,
+                                file: object.file,
+                                status: 404,
+                                message: "Fail",
+                            };
+                        });
+                })
+            );
+        });
+    })
+    return Promise.all(promises)
+}
 
 //Función que retorna el total de links y links únicos
 const totalAndUnique = (arraylinks) => {
-    const totalLinks = arraylinks.length;
-    const uniqueLinks = new Set(arraylinks.map((element) => element.href)); // crear una colección de links únicos(no se repiten);
-    const stats = `${('Total :')} ${(totalLinks)}\n${('Unique :')} ${(uniqueLinks.size)}\n`;
-    return stats;
+    let totalLinks = 0;
+    let uniqueLinks = [];
+    arraylinks.forEach(arr => {
+        totalLinks += arr.length;
+        uniqueLinks = uniqueLinks.concat(arr)
+    })
+    uniqueLinks = new Set(uniqueLinks.map((element) => element.href)); // crear una colección de links únicos(no se repiten);
+    const stats = `${('Total :')} ${(totalLinks)}\n${('Unique :')} ${(uniqueLinks.size)}`;
+    console.log(stats);
 }
 
 //Función que verifica si hay algun link roto
 const broken = (arraylinks) => {
-    const broken = arraylinks.filter(elem => elem.message === 'Fail')
-    const stats = `${('Broken :')} ${(broken.length)}\n`;
-    return stats;
+    let broken = [];
+    arraylinks.forEach(arr => {
+        broken = broken.concat(arr.filter(elem => elem.message === 'Fail'));
+    })
+    const stats = `${('Broken :')} ${(broken.length)}`;
+    console.log(stats);
 }
 
 // getObjetsLinks(route)
