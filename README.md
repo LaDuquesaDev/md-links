@@ -21,13 +21,14 @@ With MD-LINKS you will be able to read files that contain _links_ (links/links),
 
 ## 2. Installation
 
-`$ npm install yuliduquedealba/md-links`
+`$ npm install md-links-yuli`
+![api](./img/npm-install.png)
 
 ## 3. User guide
 
 #### API:
 
-`const { mdLinks } = require('md-links');`
+`const { mdLinks } = require('md-links-yuli');`
 
 *If you want to validate the links found in your `.md` files you can use the `{ validate: true }` property as follows:*
 
@@ -51,20 +52,19 @@ With MD-LINKS you will be able to read files that contain _links_ (links/links),
 
 `md-links <path-to-file>`
 
-![Object with links](./img/mdLinks-route.png)
+![Object with links](./img/mdLinks-folder.png)
 
 `md-links <path-to-file> --validate or --v`
 
-![Option --validate](./img/mdLinks-route-v.png)
-
-`md-links <path-to-file> --validate --stats or --v --s`
-
-![Option --validate and --stats](./img/mdLinks-route-v-s.png)
+![Option --validate](./img/mdLinks-folder-v.png)
 
 `md-links <path-to-file> --stats or --s`
 
-![Option --stats](./img/mdLinks-route-s.png)
+![Option --stats](./img/mdLinks-folder-s.png)
 
+`md-links <path-to-file> --validate --stats or --v --s`
+
+![Option --validate and --stats](./img/mdLinks-folder-v-s.png)
 
 ## 4. Flowchart
 

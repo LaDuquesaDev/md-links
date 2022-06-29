@@ -1,6 +1,6 @@
 {
     "name": "md-links-yuli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Módulo para validar links de archivos Markdown.",
     "main": "./index.js",
     "bin": {
