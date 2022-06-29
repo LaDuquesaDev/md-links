@@ -22,6 +22,7 @@ With MD-LINKS you will be able to read files that contain _links_ (links/links),
 ## 2. Installation
 
 `$ npm install md-links-yuli`
+
 ![api](./img/npm-install.png)
 
 ## 3. User guide
@@ -32,20 +33,20 @@ With MD-LINKS you will be able to read files that contain _links_ (links/links),
 
 *If you want to validate the links found in your `.md` files you can use the `{ validate: true }` property as follows:*
 
-![api](./img/api-v-true.png)
+![api](./img/api-true.png)
 
 *Return value:*
 
-![validate true cli](./img/api-v-true-cli.png)
+![validate true cli](./img/api-true-tr.png)
 
 
 *If you only want to see the links found in your `.md` files you can change the property to `{ validate: false }`:*
 
-![api](./img/api-v-false.png)
+![api](./img/api-false.png)
 
 *Return value:*
 
-![validate false cli](./img/api-v-false-cli.png)
+![validate false cli](./img/api-false-tr.png)
 
 
 #### CLI (Command Line Interface):
