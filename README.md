@@ -2,15 +2,16 @@
 
 ## Índice
 
-* [1. md-links](#1-md-links)
+* [1. Md-Links](#1-md-links)
 * [2. Installation](#2-installation)
 * [3. User guide](#3-user-guide)
 * [4. Flowchart](#4-flowchart)
 * [5. Backlog](#5-backlog)
 * [6. Author](#6-author)
 
+***
 
-## 1. MD-LINKS
+## 1. Md-Links
 
 ### Yes, another library, but different from all the previous ones 📚
 
@@ -18,35 +19,35 @@ MD-LINKS is a library and a command line tool (CLI) executable with [Node.js](ht
 
 With MD-LINKS you will be able to read files that contain _links_ (links/links), identify which ones are broken or no longer valid, in order to prevent them from damaging the value of the information you want to share.
 
-## 2. Installation 🛠
+## 2. Installation
 
 `$ npm install yuliduquedealba/md-links`
 
-## 3. User guide 💻
+## 3. User guide
 
-**API:**
+#### API:
 
 `const { mdLinks } = require('md-links');`
 
-*Si deseas validar los links encontrados en tus archivos `.md` puedes usar la propiedad { validate:true } de la siguiente manera:*
+*If you want to validate the links found in your `.md` files you can use the `{ validate: true }` property as follows:*
 
 ![api](./img/api-v-true.png)
 
-*Valor de retorno:*
+*Return value:*
 
 ![validate true cli](./img/api-v-true-cli.png)
 
 
-*Si sólo deseas ver los links encontrados en tus archivos `.md` puedes usar la propiedad { validate:false } de la siguiente manera:*
+*If you only want to see the links found in your `.md` files you can change the property to `{ validate: false }`:*
 
 ![api](./img/api-v-false.png)
 
-*Valor de retorno:*
+*Return value:*
 
 ![validate false cli](./img/api-v-false-cli.png)
 
 
-**CLI (Command Line Interface):**
+#### CLI (Command Line Interface):
 
 `md-links <path-to-file>`
 
@@ -65,7 +66,7 @@ With MD-LINKS you will be able to read files that contain _links_ (links/links),
 ![Option --stats](./img/mdLinks-route-s.png)
 
 
-## 4. Flowchart 🔁
+## 4. Flowchart
 
   <details><summary>Watch</summary><p>
 
@@ -73,10 +74,10 @@ With MD-LINKS you will be able to read files that contain _links_ (links/links),
   
 </p></details>
 
-## 5. Backlog 📝
+## 5. Backlog
 
-El [backlog](https://github.com/yuliduquedealba/md-links/projects/1) fue implementado con Github Projets
+The [backlog](https://github.com/yuliduquedealba/md-links/projects/1) was implemented with Github Projects
 
-## 6. Author 👩‍💻
+## 6. Author
 
 [Yulimar Duque](https://www.linkedin.com/in/yulimarduque/) front-end developer

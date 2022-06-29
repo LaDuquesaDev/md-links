@@ -2,9 +2,9 @@ const { mdLinks } = require('../index.js');
 const process = require('process');
 
 const options = { validate: false, stats: false };
-const route = `${process.cwd()}test\\test-folder\\test-file.md`;
+const route = `${process.cwd()}\\test\\test-folder\\test-file.md`;
 const invalidRoute = 'test\\test-folder\\test-file1.md';
-const fileWithoutLinks = 'test//test-folder//anotherFiles1.md//hola.md';
+const fileWithoutLinks = 'C:\\Users\\yduqu\\OneDrive\\Escritorio\\Laboratoria\\md-links\\test\\test-folder\\test-file.md';
 
 const arrayLinksValidated = [{
     href: 'https://www.google.com.co/',
