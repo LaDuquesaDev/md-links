@@ -1,11 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const clc = require("cli-color");
 const { default: axios } = require("axios");
-const [, , route] = process.argv;
-
-// Valida si la ruta existe
-// const existsPath = (route) => fs.existsSync(route);
 
 //Valida si la es ruta es absoluta
 const absolutePath = (route) => path.isAbsolute(route);
@@ -43,11 +38,9 @@ const getMdFiles = (currentRoute) => {
 
 //Lectura de archivo .md
 const readMdFiles = (MDfile) => {
-    // console.log('MDFILE', MDfile);
     return new Promise((resolve, reject) => {
         fs.readFile(MDfile, "utf-8", (err, data) => {
             if (err) {
-                // console.log('EEEERR', err);
                 reject(err);
             } else {
                 resolve({
@@ -96,14 +89,11 @@ const getLinksMdFiles = (routeMDfile) =>
 const getObjetsLinks = (routes) => {
     const promises = routes.map(elem => {
         return getLinksMdFiles(elem).then((arrayLinksConvert) => {
-            // console.log('arrayLinksConvert', arrayLinksConvert);
             return Promise.all(
                 arrayLinksConvert.map((object) => {
-                    // console.log('OBJECT.HREF', object.href);
                     return axios
                         .get(object.href)
                         .then((result) => {
-                            // result.status >= 200 && result.status <= 399 ? "Ok" : "Fail";
                             return {
                                 href: object.href,
                                 text: object.text,

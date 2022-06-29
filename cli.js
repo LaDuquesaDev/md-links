@@ -32,13 +32,13 @@ mdLinks.mdLinks(argv[2], readOptions())
         } else if (argv.includes('--validate') || argv.includes('--v')) {
             res.forEach(arr => {
                 arr.forEach(e => {
-                    console.log((`${e.file} ${e.href} ${e.message} ${e.status} ${e.text}\n`));
+                    console.log((`\n${e.file} ${e.href} ${e.message} ${e.status} ${e.text}`));
                 })
             })
         } else {
             res.forEach(arr => {
                 arr.forEach(e => {
-                    console.log((`${e.file} ${e.href} ${e.text}\n`));
+                    console.log((`\n${e.file} ${e.href} ${e.text}`));
                 })
             })
         }
